@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/rand"
 	"io/ioutil"
+	"math/big"
 	"os"
 	"strings"
 )
@@ -52,4 +54,17 @@ func newDeckFromFile(filename string) deck {
 	s := strings.Split(string(bs), ",")
 
 	return deck(s)
+}
+
+func (d deck) shuffle() {
+	for i := range d {
+		newPosition, err := rand.Int(rand.Reader, big.NewInt(int64(len(d)-1)))
+
+		if err != nil {
+			println("Error: ", err)
+			os.Exit(1)
+		}
+
+		d[i], d[newPosition.Int64()] = d[newPosition.Int64()], d[i]
+	}
 }

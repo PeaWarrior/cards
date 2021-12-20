@@ -1,13 +1,8 @@
 package main
 
 func main() {
-	// cards := newDeck()
+	cards := newDeck()
 
-	// hand, remainingCards := deal(cards, 7)
-
-	// hand.print()
-	// remainingCards.print()
-
-	// hand.saveToFile("hand")
-	newDeckFromFile("hand").print()
+	cards.shuffle()
+	cards.print()
 }
